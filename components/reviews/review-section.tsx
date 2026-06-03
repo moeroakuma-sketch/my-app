@@ -3,6 +3,8 @@ import Link from "next/link";
 import { Star } from "lucide-react";
 import { HelpfulButton, ReportReviewButton } from "@/components/reviews/review-actions";
 import { ReviewForm } from "@/components/reviews/review-form";
+import { ReviewItemButton } from "@/components/reviews/review-edit";
+
 
 type ReviewItem = {
   id: string;
@@ -11,6 +13,7 @@ type ReviewItem = {
   helpfulCount: number;
   createdAt: string;
   userName: string;
+  productId: string;
   images: {
     id: string;
     imagePath: string;
@@ -100,6 +103,7 @@ export function ReviewSection({
                       </p>
                     </div>
                     <ReportReviewButton reviewId={review.id} />
+                    <ReviewItemButton review={review as ReviewItem} />
                   </div>
 
                   <p className="mt-4 whitespace-pre-wrap text-sm leading-6 text-zinc-700">
