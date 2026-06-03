@@ -1,0 +1,151 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../app/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Product {
+  id          String      @id @default(cuid())
+  name        String
+  slug        String      @unique
+  description String
+  price       Int
+  imageUrl    String
+  stock       Int
+  category    String
+  createdAt   DateTime    @default(now())
+  orderItems  OrderItem[]
+  Review      Review[]
+}
+
+model User {
+  id             String          @id @default(cuid())
+  name           String
+  email          String          @unique
+  passwordHash   String
+  phone          String          @default("")
+  postalCode     String          @default("")
+  prefecture     String          @default("")
+  city           String          @default("")
+  town           String          @default("")
+  addressLine    String          @default("")
+  createdAt      DateTime        @default(now())
+  updatedAt      DateTime        @updatedAt
+  orders         Order[]
+  paymentMethods PaymentMethod[]
+  Review         Review[]
+  ReviewHelpful  ReviewHelpful[]
+  ReviewReport   ReviewReport[]
+}
+
+model PaymentMethod {
+  id         String   @id @default(cuid())
+  userId     String
+  holderName String
+  brand      String
+  last4      String
+  expMonth   Int
+  expYear    Int
+  isDefault  Boolean  @default(true)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+}
+
+model Order {
+  id           String      @id @default(cuid())
+  customerName String
+  email        String
+  postalCode   String
+  prefecture   String
+  city         String
+  town         String      @default("")
+  addressLine  String
+  phone        String
+  total        Int
+  status       String      @default("received")
+  createdAt    DateTime    @default(now())
+  userId       String?
+  user         User?       @relation(fields: [userId], references: [id])
+  items        OrderItem[]
+
+  @@index([userId])
+}
+
+model OrderItem {
+  id        String  @id @default(cuid())
+  orderId   String
+  productId String
+  quantity  Int
+  unitPrice Int
+  order     Order   @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  product   Product @relation(fields: [productId], references: [id])
+
+  @@index([orderId])
+  @@index([productId])
+}
+
+/// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
+model Review {
+  id            String          @id
+  userId        String
+  productId     String
+  rating        Int
+  comment       String
+  helpfulCount  Int             @default(0)
+  createdAt     DateTime        @default(now())
+  updatedAt     DateTime        @default(now())
+  Product       Product         @relation(fields: [productId], references: [id], onDelete: Cascade)
+  User          User            @relation(fields: [userId], references: [id], onDelete: Cascade)
+  ReviewHelpful ReviewHelpful[]
+  ReviewImage   ReviewImage[]
+  ReviewReport  ReviewReport[]
+
+  @@unique([userId, productId])
+  @@index([createdAt])
+  @@index([productId])
+  @@index([userId])
+}
+
+model ReviewHelpful {
+  id        String   @id
+  reviewId  String
+  userId    String
+  createdAt DateTime @default(now())
+  Review    Review   @relation(fields: [reviewId], references: [id], onDelete: Cascade)
+  User      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([reviewId, userId])
+  @@index([userId])
+}
+
+model ReviewImage {
+  id        String   @id
+  reviewId  String
+  imagePath String
+  createdAt DateTime @default(now())
+  Review    Review   @relation(fields: [reviewId], references: [id], onDelete: Cascade)
+
+  @@index([reviewId])
+}
+
+/// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
+model ReviewReport {
+  id        String   @id
+  reviewId  String
+  userId    String
+  reason    String
+  status    String   @default("pending")
+  createdAt DateTime @default(now())
+  Review    Review   @relation(fields: [reviewId], references: [id], onDelete: Cascade)
+  User      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([reviewId, userId])
+  @@index([status])
+  @@index([userId])
+}
