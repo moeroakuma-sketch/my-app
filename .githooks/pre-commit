@@ -1,0 +1,11 @@
+#!/bin/sh
+set -e
+
+if command -v npm.cmd >/dev/null 2>&1; then
+  NPM_CMD="npm.cmd"
+else
+  NPM_CMD="npm"
+fi
+
+echo "Running lint and unit tests before commit..."
+"$NPM_CMD" run precommit

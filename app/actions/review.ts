@@ -7,6 +7,7 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { getCurrentUserId } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
+import { ProductCard } from "@/components/products/product-card";
 
 const MAX_COMMENT_LENGTH = 1000;
 const MAX_IMAGE_COUNT = 3;
@@ -104,6 +105,8 @@ async function saveReviewImages(reviewId: string, files: File[]) {
   return images;
 }
 
+
+//レビュー作成
 export async function createReview(
   productId: string,
   formData: FormData,
@@ -190,6 +193,82 @@ export async function createReview(
           : {}),
       },
     });
+  } catch {
+    return {
+      success: false,
+      error: "レビューの投稿に失敗しました。時間をおいてもう一度お試しください。",
+    };
+  }
+
+  revalidatePath(`/products/${product.slug}`);
+  return { success: true };
+}
+
+//レビュー編集
+export async function updateReview(
+  reviewId: string,
+  productId: string,
+  formData: FormData,
+): Promise<ReviewActionResult> {
+  const product = await prisma.product.findUnique({
+    where: { id: productId },
+  });
+
+  if (!product) {
+    return { success: false, error: "商品が見つかりません。" };
+  }
+
+  const userId = await getCurrentUserId();
+  if (!userId) {
+    redirect(`/login?next=${encodeURIComponent(`/products/${product.slug}`)}`);
+  }
+
+  const ratingValue = formData.get("rating");
+  if (typeof ratingValue !== "string") {
+    return { success: false, error: "評価を選択してください。" };
+  }
+
+  const rating = Number(ratingValue);
+  if (!Number.isInteger(rating) || rating < 1 || rating > 5) {
+    return { success: false, error: "評価は1〜5で選択してください。" };
+  }
+
+  const comment = getString(formData, "comment").trim();
+  if (!comment) {
+    return { success: false, error: "レビュー内容を入力してください。" };
+  }
+
+  if (comment.length > MAX_COMMENT_LENGTH) {
+    return {
+      success: false,
+      error: `レビュー内容は${MAX_COMMENT_LENGTH}文字以内で入力してください。`,
+    };
+  }
+
+  const imageFiles = getImageFiles(formData);
+  const imageError = validateImages(imageFiles);
+  if (imageError) {
+    return { success: false, error: imageError };
+  }
+
+  const existingReview = await prisma.review.findUnique({
+      where: { id: reviewId },
+  });
+
+  try {
+    //const images = await saveReviewImages(reviewId, imageFiles);
+
+    const updated = await prisma.review.updateMany({
+      where: { id: reviewId, userId },
+      data: { rating, comment },
+    });
+    
+    if (updated.count === 0) {
+      return {
+        success: false,
+        error: "更新対象のレビューが見つかりません。",
+      };
+    }
   } catch {
     return {
       success: false,

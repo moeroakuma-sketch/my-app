@@ -37,6 +37,7 @@ export default async function ProductDetailPage({ params }: PageProps) {
           rating: true,
           comment: true,
           helpfulCount: true,
+          productId: true,
           createdAt: true,
           User: {
             select: {
@@ -114,6 +115,7 @@ export default async function ProductDetailPage({ params }: PageProps) {
     rating: review.rating,
     comment: review.comment,
     helpfulCount: review.helpfulCount,
+    productId : review.productId,
     createdAt: review.createdAt.toISOString(),
     userName: review.User.name,
     images: review.ReviewImage,
