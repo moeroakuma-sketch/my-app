@@ -20,6 +20,38 @@ You can start editing the page by modifying `app/page.tsx`. The page auto-update
 
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
+## Local Database Snapshot
+
+The repository stores the local PostgreSQL schema in `prisma/schema.prisma` and
+the saved table contents in `prisma/snapshots/local.json`.
+
+Export the current local database:
+
+```bash
+make db-snapshot
+```
+
+Reset the database configured by `.env` and restore the saved snapshot:
+
+```bash
+make db-reset
+```
+
+The reset command displays a destructive-operation warning and only continues
+after entering `RESET`. For a non-interactive development environment, set
+`DB_RESET_CONFIRM=1`.
+
+On Windows systems without GNU Make, use the equivalent npm commands:
+
+```bash
+npm run db:snapshot
+npm run db:reset
+```
+
+The snapshot contains all development rows, including users, password hashes,
+orders, reviews, and payment method metadata. Do not put production or other
+sensitive personal data in the local database before exporting it.
+
 ## Learn More
 
 To learn more about Next.js, take a look at the following resources:

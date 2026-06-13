@@ -1,0 +1,352 @@
+{
+  "formatVersion": 1,
+  "exportedAt": "2026-06-13T09:09:55.929Z",
+  "checkConstraints": [
+    {
+      "tableName": "Review",
+      "constraintName": "Review_rating_check",
+      "definition": "CHECK (((rating >= 1) AND (rating <= 5)))"
+    },
+    {
+      "tableName": "ReviewReport",
+      "constraintName": "ReviewReport_reason_check",
+      "definition": "CHECK ((reason = ANY (ARRAY['false_info'::text, 'harassment'::text])))"
+    },
+    {
+      "tableName": "ReviewReport",
+      "constraintName": "ReviewReport_status_check",
+      "definition": "CHECK ((status = ANY (ARRAY['pending'::text, 'reviewed'::text, 'dismissed'::text])))"
+    }
+  ],
+  "tables": {
+    "products": [
+      {
+        "id": "cmp9juw7x000030tldlsv187j",
+        "name": "オーガニックコットンTシャツ",
+        "slug": "organic-cotton-tee",
+        "description": "肌触りの良いオーガニックコットン100%。日常使いに最適な定番Tシャツです。",
+        "price": 3980,
+        "imageUrl": "https://picsum.photos/seed/tee1/800/800",
+        "stock": 25,
+        "category": "アパレル",
+        "createdAt": "2026-05-17T09:05:18.237Z"
+      },
+      {
+        "id": "cmp9juw8l000130tl041s02cc",
+        "name": "リネンシャツ",
+        "slug": "linen-shirt",
+        "description": "通気性抜群のリネン素材。夏場のビジネスカジュアルに。",
+        "price": 8900,
+        "imageUrl": "https://picsum.photos/seed/shirt1/800/800",
+        "stock": 14,
+        "category": "アパレル",
+        "createdAt": "2026-05-17T09:05:18.261Z"
+      },
+      {
+        "id": "cmp9juw8o000230tltdslqtsy",
+        "name": "ウールニットセーター",
+        "slug": "wool-knit-sweater",
+        "description": "上質なメリノウール。軽くて暖かい冬の定番アイテム。",
+        "price": 12800,
+        "imageUrl": "https://picsum.photos/seed/sweater1/800/800",
+        "stock": 11,
+        "category": "アパレル",
+        "createdAt": "2026-05-17T09:05:18.264Z"
+      },
+      {
+        "id": "cmp9juw8r000330tl1zceg6s8",
+        "name": "レザーミニ財布",
+        "slug": "leather-mini-wallet",
+        "description": "コンパクトながら収納力抜群。本革を使用したミニ財布。",
+        "price": 6500,
+        "imageUrl": "https://picsum.photos/seed/wallet1/800/800",
+        "stock": 20,
+        "category": "バッグ・小物",
+        "createdAt": "2026-05-17T09:05:18.267Z"
+      },
+      {
+        "id": "cmp9juw8t000430tl25uxchbp",
+        "name": "キャンバストートバッグ",
+        "slug": "canvas-tote-bag",
+        "description": "A4サイズが入る大容量トート。毎日使えるシンプルデザイン。",
+        "price": 3200,
+        "imageUrl": "https://picsum.photos/seed/tote1/800/800",
+        "stock": 30,
+        "category": "バッグ・小物",
+        "createdAt": "2026-05-17T09:05:18.269Z"
+      },
+      {
+        "id": "cmp9juw8v000530tln9rrro56",
+        "name": "ステンレスマグボトル",
+        "slug": "stainless-mug-bottle",
+        "description": "保温・保冷12時間。500mlのスリムなマグボトル。",
+        "price": 2800,
+        "imageUrl": "https://picsum.photos/seed/bottle1/800/800",
+        "stock": 40,
+        "category": "ライフスタイル",
+        "createdAt": "2026-05-17T09:05:18.271Z"
+      },
+      {
+        "id": "cmp9juw8x000630tlt6stepnt",
+        "name": "アロマディフューザー",
+        "slug": "aroma-diffuser",
+        "description": "超音波式で静音設計。お部屋をやさしい香りで包みます。",
+        "price": 4500,
+        "imageUrl": "https://picsum.photos/seed/diffuser1/800/800",
+        "stock": 18,
+        "category": "ライフスタイル",
+        "createdAt": "2026-05-17T09:05:18.273Z"
+      },
+      {
+        "id": "cmp9juw8z000730tl15gkaz2a",
+        "name": "セラミックマグカップ",
+        "slug": "ceramic-mug",
+        "description": "手作り風の釉薬仕上げ。朝のコーヒータイムに。",
+        "price": 1980,
+        "imageUrl": "https://picsum.photos/seed/mug1/800/800",
+        "stock": 35,
+        "category": "ライフスタイル",
+        "createdAt": "2026-05-17T09:05:18.275Z"
+      },
+      {
+        "id": "cmp9juw91000830tl57j2lp07",
+        "name": "ワイヤレスイヤホン",
+        "slug": "wireless-earbuds",
+        "description": "ノイズキャンセリング搭載。最大24時間の再生が可能。",
+        "price": 15800,
+        "imageUrl": "https://picsum.photos/seed/earbuds1/800/800",
+        "stock": 10,
+        "category": "ガジェット",
+        "createdAt": "2026-05-17T09:05:18.277Z"
+      },
+      {
+        "id": "cmp9juw93000930tlc4bz8ye2",
+        "name": "ポータブル充電器 10000mAh",
+        "slug": "portable-charger",
+        "description": "急速充電対応。スマホを約2回フル充電できます。",
+        "price": 4200,
+        "imageUrl": "https://picsum.photos/seed/charger1/800/800",
+        "stock": 22,
+        "category": "ガジェット",
+        "createdAt": "2026-05-17T09:05:18.279Z"
+      },
+      {
+        "id": "cmp9juw94000a30tl2n0jcnwf",
+        "name": "ブルーライトカットメガネ",
+        "slug": "blue-light-glasses",
+        "description": "PC作業時の目の疲れを軽減。軽量フレームで長時間も快適。",
+        "price": 5500,
+        "imageUrl": "https://picsum.photos/seed/glasses1/800/800",
+        "stock": 11,
+        "category": "ガジェット",
+        "createdAt": "2026-05-17T09:05:18.280Z"
+      },
+      {
+        "id": "cmp9juw95000b30tlv1sed1ne",
+        "name": "ハンドクリーム セット",
+        "slug": "hand-cream-set",
+        "description": "3種の香りが楽しめるミニサイズセット。ギフトにも最適。",
+        "price": 2400,
+        "imageUrl": "https://picsum.photos/seed/cream1/800/800",
+        "stock": 24,
+        "category": "ビューティー",
+        "createdAt": "2026-05-17T09:05:18.281Z"
+      }
+    ],
+    "users": [
+      {
+        "id": "cmp9kpewo000044tl6r03aiio",
+        "name": "高瀬一志",
+        "email": "moeroakuma@gmail.com",
+        "passwordHash": "Yqi2a3hIv2x5uYH7Z1Qs5g.qTZtwxuq3WhbTHQT443uvkTsh6gRDiEASo1Gc_jVP-ldrbhYO7hz2wol0iDuRIBYNQquffNZG-r5UIDT3f0qdw",
+        "phone": "09012345678",
+        "postalCode": "2790000",
+        "prefecture": "千葉県",
+        "city": "船橋市",
+        "town": "サンプル",
+        "addressLine": "6-66-6",
+        "createdAt": "2026-05-17T09:29:02.136Z",
+        "updatedAt": "2026-05-24T13:33:18.295Z"
+      }
+    ],
+    "paymentMethods": [
+      {
+        "id": "cmp9kqgah000144tler32ijmz",
+        "userId": "cmp9kpewo000044tl6r03aiio",
+        "holderName": "TEST TAKASE",
+        "brand": "Visa",
+        "last4": "4242",
+        "expMonth": 1,
+        "expYear": 2029,
+        "isDefault": true,
+        "createdAt": "2026-05-17T09:29:50.585Z",
+        "updatedAt": "2026-05-24T08:26:03.445Z"
+      }
+    ],
+    "orders": [
+      {
+        "id": "cmp9pr6ao000244tl8pqehxf0",
+        "customerName": "高瀬一志",
+        "email": "moeroakuma@gmail.com",
+        "postalCode": "2740065",
+        "prefecture": "千葉県",
+        "city": "船橋市",
+        "town": "高根台",
+        "addressLine": "6-22-9",
+        "phone": "09012345678",
+        "total": 11300,
+        "status": "cancelled",
+        "createdAt": "2026-05-17T11:50:22.369Z",
+        "userId": "cmp9kpewo000044tl6r03aiio"
+      },
+      {
+        "id": "cmpjknfmh0000q4tlg2lw0q1r",
+        "customerName": "高瀬一志",
+        "email": "moeroakuma@gmail.com",
+        "postalCode": "2740065",
+        "prefecture": "千葉県",
+        "city": "船橋市",
+        "town": "高根台",
+        "addressLine": "9-99-9",
+        "phone": "09012345678",
+        "total": 12800,
+        "status": "cancelled",
+        "createdAt": "2026-05-24T09:25:11.513Z",
+        "userId": "cmp9kpewo000044tl6r03aiio"
+      },
+      {
+        "id": "cmpjpdjfy0002q4tl2u9ihbgg",
+        "customerName": "高瀬一志",
+        "email": "moeroakuma@gmail.com",
+        "postalCode": "2790000",
+        "prefecture": "千葉県",
+        "city": "船橋市",
+        "town": "サンプル",
+        "addressLine": "6-66-6",
+        "phone": "09012345678",
+        "total": 4800,
+        "status": "cancelled",
+        "createdAt": "2026-05-24T11:37:27.982Z",
+        "userId": "cmp9kpewo000044tl6r03aiio"
+      },
+      {
+        "id": "cmpjth9f70004q4tlm0lozzer",
+        "customerName": "高瀬一志",
+        "email": "moeroakuma@gmail.com",
+        "postalCode": "2790000",
+        "prefecture": "千葉県",
+        "city": "船橋市",
+        "town": "サンプル",
+        "addressLine": "6-66-6",
+        "phone": "09012345678",
+        "total": 5500,
+        "status": "cancelled",
+        "createdAt": "2026-05-24T13:32:20.084Z",
+        "userId": "cmp9kpewo000044tl6r03aiio"
+      },
+      {
+        "id": "cmptw6het0000m0tl7ypk2aah",
+        "customerName": "高瀬一志",
+        "email": "moeroakuma@gmail.com",
+        "postalCode": "2790000",
+        "prefecture": "千葉県",
+        "city": "船橋市",
+        "town": "サンプル",
+        "addressLine": "6-66-6",
+        "phone": "09012345678",
+        "total": 22000,
+        "status": "received",
+        "createdAt": "2026-05-31T14:45:37.829Z",
+        "userId": "cmp9kpewo000044tl6r03aiio"
+      },
+      {
+        "id": "cmpxkcmcv0000ectlmpsoko3s",
+        "customerName": "高瀬一志",
+        "email": "moeroakuma@gmail.com",
+        "postalCode": "2790000",
+        "prefecture": "千葉県",
+        "city": "船橋市",
+        "town": "サンプル",
+        "addressLine": "6-66-6",
+        "phone": "09012345678",
+        "total": 2400,
+        "status": "completed",
+        "createdAt": "2026-06-03T04:25:33.487Z",
+        "userId": "cmp9kpewo000044tl6r03aiio"
+      }
+    ],
+    "orderItems": [
+      {
+        "id": "cmp9pr6b6000344tlnv7coivv",
+        "orderId": "cmp9pr6ao000244tl8pqehxf0",
+        "productId": "cmp9juw95000b30tlv1sed1ne",
+        "quantity": 1,
+        "unitPrice": 2400
+      },
+      {
+        "id": "cmp9pr6b6000444tlz0mdddci",
+        "orderId": "cmp9pr6ao000244tl8pqehxf0",
+        "productId": "cmp9juw8l000130tl041s02cc",
+        "quantity": 1,
+        "unitPrice": 8900
+      },
+      {
+        "id": "cmpjknfmw0001q4tls1dpxovf",
+        "orderId": "cmpjknfmh0000q4tlg2lw0q1r",
+        "productId": "cmp9juw8o000230tltdslqtsy",
+        "quantity": 1,
+        "unitPrice": 12800
+      },
+      {
+        "id": "cmpjpdjge0003q4tl3k7gk5xk",
+        "orderId": "cmpjpdjfy0002q4tl2u9ihbgg",
+        "productId": "cmp9juw95000b30tlv1sed1ne",
+        "quantity": 2,
+        "unitPrice": 2400
+      },
+      {
+        "id": "cmpjth9fh0005q4tl7c76aar0",
+        "orderId": "cmpjth9f70004q4tlm0lozzer",
+        "productId": "cmp9juw94000a30tl2n0jcnwf",
+        "quantity": 1,
+        "unitPrice": 5500
+      },
+      {
+        "id": "cmptw6hey0001m0tl3lej8pqr",
+        "orderId": "cmptw6het0000m0tl7ypk2aah",
+        "productId": "cmp9juw94000a30tl2n0jcnwf",
+        "quantity": 4,
+        "unitPrice": 5500
+      },
+      {
+        "id": "cmpxkcmd30001ectlj74hjtj6",
+        "orderId": "cmpxkcmcv0000ectlmpsoko3s",
+        "productId": "cmp9juw95000b30tlv1sed1ne",
+        "quantity": 1,
+        "unitPrice": 2400
+      }
+    ],
+    "reviews": [
+      {
+        "id": "329c1f07-5dec-468b-884c-2a21b59e55b9",
+        "userId": "cmp9kpewo000044tl6r03aiio",
+        "productId": "cmp9juw95000b30tlv1sed1ne",
+        "rating": 5,
+        "comment": "これは品質が良いです。ｔい",
+        "helpfulCount": 0,
+        "createdAt": "2026-06-03T04:30:21.941Z",
+        "updatedAt": "2026-06-03T04:30:21.941Z"
+      }
+    ],
+    "reviewHelpful": [],
+    "reviewImages": [
+      {
+        "id": "7c502a9d-f029-442f-ab9b-b8ad877ee894",
+        "reviewId": "329c1f07-5dec-468b-884c-2a21b59e55b9",
+        "imagePath": "/uploads/reviews/329c1f07-5dec-468b-884c-2a21b59e55b9/994190ec-392b-4016-a411-ba26ecd7b43c.jpg",
+        "createdAt": "2026-06-03T04:30:21.941Z"
+      }
+    ],
+    "reviewReports": []
+  }
+}

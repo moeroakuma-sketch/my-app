@@ -14,6 +14,8 @@
     "postinstall": "prisma generate",
     "db:push": "prisma db push",
     "db:seed": "prisma db seed",
+    "db:snapshot": "tsx scripts/db-snapshot.ts",
+    "db:reset": "tsx scripts/db-reset.ts",
     "db:studio": "prisma studio"
   },
   "prisma": {
